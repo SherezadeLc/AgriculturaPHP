@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         <?php
         // put your code hereineiuf
+        //hola
         ?>
     </body>
 </html>
