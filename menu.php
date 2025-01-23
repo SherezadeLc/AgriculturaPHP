@@ -41,7 +41,7 @@ session_start();
                 ?>
                 <br><br>
                 <form action="inserta_noticia.php" method="POST">
-                    <input type="submit" name="añadir" value="Añadir noticias"><br>
+                    <input type="submit" name="añadir" value="Elegir trabajo"><br>
                 </form><br>
 
                 <form action="consulta_noticias2.php" method="POST">
@@ -62,7 +62,7 @@ session_start();
             // Botón de logout
             ?>
             <form action="logout.php" method="POST">
-                <input type="submit" name="logout" value="Logout"><br>
+                <input type="submit" name="logout" value="Cerrar seseión"><br>
             </form>
         <?php
         } else {
