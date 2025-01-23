@@ -42,7 +42,7 @@ and open the template in the editor.
         $conexion = mysqli_connect("localhost", "root", "", "agricultura")
         or die("No se puede conectar con el servidor o seleccionar la base de datos");
         
-        //
+        //s
         // Procesar el formulario solo si se presionó el botón "Registrar"
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) 
         {
