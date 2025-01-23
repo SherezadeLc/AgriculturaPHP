@@ -50,6 +50,8 @@ and open the template in the editor.
             $apellidos = $_POST['apellidos'];
             $dni = $_POST['dni'];
             $id_catastro= $_POST['id_catastro'];
+            $contrasena=$_POST['contrasena'];
+            
         }
         
         
