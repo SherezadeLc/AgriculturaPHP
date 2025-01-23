@@ -34,11 +34,26 @@ and open the template in the editor.
             
         </form>
         
-        
-        
         <?php
         // put your code here
         //DNI, nombre, contrasena, id_catastro
+        
+        //conexion a la base de datos
+        $conexion = mysqli_connect("localhost", "root", "", "agricultura")
+        or die("No se puede conectar con el servidor o seleccionar la base de datos");
+        
+        // Procesar el formulario solo si se presionó el botón "Registrar"
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) 
+        {
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $dni = $_POST['dni'];
+            $id_catastro= $_POST['id_catastro'];
+        }
+        
+        
+        
+        
         ?>
     </body>
 </html>
