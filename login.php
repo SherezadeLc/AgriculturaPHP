@@ -10,6 +10,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <h1>Loggin</h1>
         <?php
         // put your code hereineiuf
         //hola
