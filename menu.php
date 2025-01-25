@@ -19,21 +19,22 @@ session_start();
                 ?>
                 <br><br>
                 <form action="editar_agricultores.php" method="POST">
-                    
-                    boton<input type="submit" name="añadir" value="Modificar agricultores"><br>
+                    <input type="submit" name="añadir" value="Modificar Agricultores"><br>
                 </form><br>
 
                 <form action="editar_clientes.php" method="POST">
-                    <input type="submit" name="editar" value="Modificar clientes"><br>
+                    <input type="submit" name="editar" value="Modificar Clientes"><br>
                 </form><br>
 
                 <form action="editar_parcela.php" method="POST">
-                    <input type="submit" name="editar" value="Modificar parcelas"><br>
+                    <input type="submit" name="editar" value="Modificar Parcelas"><br>
                 </form><br>
                 <form action="editar_trabajos.php" method="POST">
-                    <input type="submit" name="editar" value="Modificar trabajos"><br>
+                    <input type="submit" name="editar" value="Modificar Trabajos"><br>
                 </form><br>
-
+                <form action="editar_maquinas.php" method="POST">
+                    <input type="submit" name="editar" value="Editar Máquinas"><br>
+                </form><br>
                 <?php
             } elseif ($_SESSION['tipo'] === 'agricultor') {
                 ?>
@@ -58,7 +59,7 @@ session_start();
             // Botón de logout
             ?>
             <form action="logout.php" method="POST">
-                <input type="submit" name="logout" value="Cerrar seseión"><br>
+                <input type="submit" name="logout" value="Cerrar sesión"><br>
             </form>
         <?php
         } else {

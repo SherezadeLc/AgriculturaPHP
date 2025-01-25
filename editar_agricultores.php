@@ -18,15 +18,18 @@ session_start();
             @$nombre = $_POST['nombre'];
             @$dni = $_POST['dni'];
             @$estado = $_POST['estado'];
-            @$contrasena=$_POST['contrasena'];
 
-            $consulta = "UPDATE agricultores SET nombre='$nombre', telefono='$telefono', email='$email' WHERE id='$id'";
-            if (mysqli_query($conexion, $query_update)) {
+            $consultaActu = "UPDATE agricultores SET nombre='$nombre', dni='$dni', estado='$estado' WHERE id_agricultor='$id'";
+            
+            if (mysqli_query($conexion, $consultaActu)) {
                 echo "<p>El agricultor ha sido actualizado correctamente.</p>";
             } else {
                 echo "<p>Error al actualizar el agricultor: " . mysqli_error($conexion) . "</p>";
             }
         }
+        $consulta="SELECT * FROM agricultores";
+        $conexion= mysqli_query($conexion, $consulta);
+        
         ?>
         
         <form action="menu.php" method="POST">
