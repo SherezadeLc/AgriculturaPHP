@@ -28,35 +28,46 @@ and open the template in the editor.
             <label>Contraseña:</label>
             <input type="password" name="password" required>
             <br>
+            <input type="submit" name="enviar" value="Resgistrar">
+            <br>
             <hr>
             <p>¿Ya te has registrado?</p>
             <a href="login.php"><input type="button" class="login-button" name="login" value="Login"/></a>
             
         </form>
         
-        <?php
-        // put your code here
-        //DNI, nombre, contrasena, id_catastro
-        
-        //conexion a la base de datos
-        $conexion = mysqli_connect("localhost", "root", "", "agricultura")
-        or die("No se puede conectar con el servidor o seleccionar la base de datos");
-        
-        //s
-        // Procesar el formulario solo si se presionó el botón "Registrar"
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) 
-        {
-            $nombre = $_POST['nombre'];
-            $apellidos = $_POST['apellidos'];
-            $dni = $_POST['dni'];
-            $id_catastro= $_POST['id_catastro'];
-            $contrasena=$_POST['contrasena'];
-            
-        }
-        
-        
-        
-        
+       <?php
+            // Conexión a la base de datos
+            $conexion = mysqli_connect("localhost", "root", "", "agricultura")
+            or die("No se puede conectar con el servidor o seleccionar la base de datos");
+
+            // Procesar el formulario solo si se presionó el botón "Registrar"
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) 
+            {
+                $nombre = $_POST['nombre'];
+                $apellidos = $_POST['apellidos'];
+                $dni = $_POST['dni'];
+                $id_catastro = $_POST['id_catastro'];
+                $contrasena = $_POST['password'];
+
+                // Verifica que los campos obligatorios estén completos
+                if ($nombre && $id_catastro) 
+                {
+                    // consulta a la base de datos para insertar al ususario en la misma
+                    $registrar_usuario = "INSERT INTO cliente (dni, nombre, contrasena, id_catastro) VALUES ('$dni', '$nombre', '$contrasena', '$id_catastro')";
+                    //conxion a la base de datos para la insercion de la informacion
+                    if (mysqli_query($conexion, $registrar_usuario)) {
+                        echo "Registro exitoso.";
+                    } else {
+                        echo "Error al registrar el usuario: " . mysqli_error($conexion);
+                    }
+                } else {
+                    echo "Por favor, completa todos los campos.";
+                }
+            }
+
+            // Cerrar conexión
+            $conexion->close();
         ?>
     </body>
 </html>
