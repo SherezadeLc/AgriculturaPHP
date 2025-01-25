@@ -17,7 +17,6 @@ session_start();
             $rol = $_SESSION["roles"];
 
             if ($rol === 'Administrador') {
-                // Mostrar todos los botones si es administrador
                 ?>
                 <br><br>
                 <form action="editar_agricultores.php" method="POST">
@@ -37,24 +36,21 @@ session_start();
 
                 <?php
             } elseif ($rol === 'Agricultor') {
-                // Mostrar solo añadir y consultar noticias si es profesor
                 ?>
                 <br><br>
-                <form action="inserta_noticia.php" method="POST">
+                <form action="elegir_trabajo.php" method="POST">
                     <input type="submit" name="añadir" value="Elegir trabajo"><br>
-                </form><br>
-
-                <form action="consulta_noticias2.php" method="POST">
-                    <input type="submit" name="consultar" value="Consultar noticias"><br>
                 </form><br>
 
                 <?php
             } elseif ($rol === 'Cliente') {
-                // Mostrar solo consultar noticias si es alumno
                 ?>
                 <br><br>
-                <form action="consulta_noticias2.php" method="POST">
-                    <input type="submit" name="consultar" value="Consultar noticias"><br>
+                <form action="añadir_parcelas.php" method="POST">
+                    <input type="submit" name="Añadir" value="Añadir parcelas"><br>
+                </form><br>
+                <form action="crear_trabajo.php" method="POST">
+                    <input type="submit" name="Crear" value="Crear trabajo"><br>
                 </form><br>
 
                 <?php
