@@ -15,12 +15,12 @@ session_start();
 
            
 
-            if ($_SESSION['tipo'] === 'Administrador') {
+            if ($_SESSION['tipo'] === 'administrador') {
                 ?>
                 <br><br>
                 <form action="editar_agricultores.php" method="POST">
                     
-                    <input type="submit" name="añadir" value="Modificar agricultores"><br>
+                    boton<input type="submit" name="añadir" value="Modificar agricultores"><br>
                 </form><br>
 
                 <form action="editar_clientes.php" method="POST">
@@ -35,7 +35,7 @@ session_start();
                 </form><br>
 
                 <?php
-            } elseif ($_SESSION['tipo'] === 'Agricultor') {
+            } elseif ($_SESSION['tipo'] === 'agricultor') {
                 ?>
                 <br><br>
                 <form action="elegir_trabajo.php" method="POST">
@@ -43,7 +43,7 @@ session_start();
                 </form><br>
 
                 <?php
-            } elseif ($_SESSION['tipo'] === 'Cliente') {
+            } elseif ($_SESSION['tipo'] === 'cliente') {
                 ?>
                 <br><br>
                 <form action="añadir_parcelas.php" method="POST">
