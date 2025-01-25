@@ -10,16 +10,16 @@ session_start();
     <body>
         <?php
         // Verificar si la sesión está activa
-        if (isset($_SESSION["usuario_valido"])) {
-            echo "Bienvenido, " . $_SESSION["usuario_valido"] . " con el rol: " . $_SESSION["roles"] . "<br>";
+        if (isset($_SESSION['tipo'])) {
+            echo "Bienvenido, " . $_SESSION['nombre'] . " con el rol: " . $_SESSION['tipo'] . "<br>";
 
-            // Mostrar los botones según el rol del usuario
-            $rol = $_SESSION["roles"];
+           
 
-            if ($rol === 'Administrador') {
+            if ($_SESSION['tipo'] === 'Administrador') {
                 ?>
                 <br><br>
                 <form action="editar_agricultores.php" method="POST">
+                    
                     <input type="submit" name="añadir" value="Modificar agricultores"><br>
                 </form><br>
 
@@ -35,7 +35,7 @@ session_start();
                 </form><br>
 
                 <?php
-            } elseif ($rol === 'Agricultor') {
+            } elseif ($_SESSION['tipo'] === 'Agricultor') {
                 ?>
                 <br><br>
                 <form action="elegir_trabajo.php" method="POST">
@@ -43,7 +43,7 @@ session_start();
                 </form><br>
 
                 <?php
-            } elseif ($rol === 'Cliente') {
+            } elseif ($_SESSION['tipo'] === 'Cliente') {
                 ?>
                 <br><br>
                 <form action="añadir_parcelas.php" method="POST">
