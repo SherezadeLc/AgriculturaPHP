@@ -42,6 +42,9 @@ session_start();
                 <form action="elegir_trabajo.php" method="POST">
                     <input type="submit" name="añadir" value="Elegir trabajo"><br>
                 </form><br>
+                <form action="cambiar_contraseña.php" method="POST">
+                    <input type="submit" name="cambiar" value="Cambiar contraseña"><br>
+                </form><br>
 
                 <?php
             } elseif ($_SESSION['tipo'] === 'cliente') {
