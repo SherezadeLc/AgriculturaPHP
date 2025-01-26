@@ -23,7 +23,7 @@ session_start();
                 </form><br>
 
                 <form action="editar_clientes.php" method="POST">
-                    <input type="submit" name="editar" value="Editar Clientes"><br>
+                    <input type="submit" name="editar" value="Listar Clientes"><br>
                 </form><br>
 
                 <form action="editar_parcela.php" method="POST">
