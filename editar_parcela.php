@@ -17,17 +17,17 @@ session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
             //aqui cogemos el id que queremos eliminar
             $id_parcela = $_POST['id_parcela'];
-            
-           
+
+
             //aqui hago la consulta para comprobar si exista lo que se quiere eliminar
             $verificarReferencias = "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela'";
             //aqui hago la conexion a la base de datos 
             $resultadoReferencias = mysqli_query($conexion, $verificarReferencias);
-            
+
             //aqui si existe alguno con ese id y si es asi entra
             if (mysqli_num_rows($resultadoReferencias) > 0) {
                 //aqui guardamos la informacion de puntos_parcela con el id que se ha recogido antes
-                $seleccionar_puntos= "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela'";
+                $seleccionar_puntos = "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela'";
                 //aqui hago la conexion a la base de datos
                 $seleccionar_punto = mysqli_query($conexion, $seleccionar_puntos);
                 //si hay una coincidencia entra
@@ -36,7 +36,6 @@ session_start();
                     $datos = mysqli_fetch_assoc($seleccionar_punto);
                     //aqui solo cogo la informacion del id_punto
                     $id_puntos = $datos['id_punto'];
-                   
                 }
 
                 //aqui le borramos el punto de asociacion para poder eliminar luego tanto las parcelas como los puntos
@@ -46,15 +45,15 @@ session_start();
                     echo "Eliminado punto de asociacion";
                 }
                 //aqui le borramos el punto de asociacion con el id que he recogido antes
-                    $eliminar_punto = "DELETE FROM puntos WHERE id_punto='$id_puntos'";
-                
+                $eliminar_punto = "DELETE FROM puntos WHERE id_punto='$id_puntos'";
+
                 //aqui hago la conexion a la base de datos 
                 if (mysqli_query($conexion, $eliminar_punto)) {
                     echo "Eliminado punto";
                 }
-                
-                
-                
+
+
+
                 // aqui hago la consulta a la base de datos para eliminar la parcela
                 $eliminarParcela = "DELETE FROM parcela WHERE id_parcela='$id_parcela'";
                 //aqui hago la conexion a la base de datos con la consulta para eliminar la parcela
@@ -115,6 +114,11 @@ session_start();
         // Cerrar la conexión a la base de datos
         mysqli_close($conexion);
         ?>
+        <br>
+        <!-- Botón para volver al menú principal -->
+        <form action="añadir_parcelas.php" method="POST">
+            <input type="submit" name="anadir_parcela" value="Añadir Parcela">
+        </form>
         <br>
         <!-- Botón para volver al menú principal -->
         <form action="menu.php" method="POST">

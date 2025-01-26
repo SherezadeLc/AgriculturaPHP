@@ -10,8 +10,79 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
+        <form method="POST" action="">
+
+
+
+            <label for="id_catastro">Numero Catastro:</label><br>
+            <input type="text" name="id_catastro" id="id_catastro" required><br><br>
+
+            <label for="numero_parcela">Numero Parcela:</label><br>
+            <input type="text" name="numero_parcela" id="numero_parcela" required><br><br>
+
+            <label for="latitud">Latitud:</label><br>
+            <input type="text" name="latitud" id="latitud" required><br><br>
+
+            <label for="longitud">Longitud:</label><br>
+            <input type="text" name="longitud" id="longitud" required><br><br>
+
+            <button type="submit" name="agregar_parcela">Agregar Parcela</button><br><br>
+
+        </form>
         <?php
         // put your code here
+        // Conexión a la base de datos
+        $conexion = mysqli_connect("localhost", "root", "", "agricultura")
+                or die("No se puede conectar con el servidor");
+
+
+        // Verificar si se envió el formulario
+        if (isset($_POST['agregar_parcela'])) {
+            $id_catastro = $_POST['id_catastro'];
+            $numero_parcela = $_POST['numero_parcela'];
+            $latitud = $_POST['latitud'];
+            $longitud = $_POST['longitud'];
+
+            $insertar_parcela = "INSERT INTO parcela (id_catastro, numero_parcela) VALUES ('$id_catastro', '$numero_parcela')";
+
+            if (mysqli_query($conexion, $insertar_parcela)) {
+                echo "Insertado en parcela";
+            }
+
+            $insertar_punto = "INSERT INTO puntos ( numero_parcela, latitud, longitud) VALUES ('$numero_parcela','$latitud','$longitud')";
+            if (mysqli_query($conexion, $insertar_punto)) {
+                echo "Insertado en puntos";
+            }
+
+
+
+
+            $selecionar = "SELECT * FROM puntos WHERE numero_parcela='$numero_parcela'";
+            //aqui hago la conexion a la base de datos 
+            $resultadoReferencias = mysqli_query($conexion, $selecionar);
+
+            if (mysqli_num_rows($resultadoReferencias) > 0) {
+                //aqui guardamos la informacion de puntos_parcela con el id que se ha recogido antes
+                $seleccionar_puntos = "SELECT * FROM parcela WHERE numero_parcela='$numero_parcela'";
+                //aqui hago la conexion a la base de datos
+                $seleccionar_punto = mysqli_query($conexion, $seleccionar_puntos);
+                //si hay una coincidencia entra
+                if (mysqli_num_rows($seleccionar_punto) > 0) {
+                    //aqui recogo la informacion de la base de datos en la variable
+                    $datos = mysqli_fetch_assoc($seleccionar_punto);
+                    //aqui solo cogo la informacion del id_punto
+                    $id_parcela = $datos['id_parcela'];
+
+                    $dato = mysqli_fetch_assoc($resultadoReferencias);
+                    $id_punto = $dato['id_punto'];
+                }
+
+                $insertar_puntos_parcela = "INSERT INTO puntos_parcela (id_punto,id_parcela) VALUES ('$id_punto','$id_parcela')";
+                if (mysqli_query($conexion, $insertar_puntos_parcela)) {
+                    echo "Insertado en puntos_parcela";
+                }
+            }
+        }
         ?>
     </body>
 </html>
