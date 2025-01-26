@@ -6,9 +6,6 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'agricultor') {
     echo '<p>Acceso no autorizado.</p>';
     exit();
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +36,13 @@ if (!$conexion) {
 
 // Verificar si se envió el formulario para cambiar la contraseña
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar'])) {
-    @$id_agricultor = $_SESSION['id_agricultor']; // ID del agricultor desde la sesión
+    @$dni_agricultor = $_SESSION['dni']; // ID del agricultor desde la sesión
     @$antigua_contrasena = $_POST['antigua_contrasena'];
     @$nueva_contrasena = $_POST['nueva_contrasena'];
     @$confirmar_contrasena = $_POST['confirmar_contrasena'];
 
     // Consultar la contraseña actual del agricultor
-    $consulta = "SELECT contrasena FROM agricultor WHERE id_agricultor = '$id_agricultor'";
+    $consulta = "SELECT contrasena FROM agricultor WHERE dni = '$dni_agricultor'";
     $resultado = mysqli_query($conexion, $consulta);
 
     // Verificar si la consulta devuelve algún resultado
@@ -58,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cambiar'])) {
             // Verificar si las nuevas contraseñas coinciden
             if ($nueva_contrasena === $confirmar_contrasena) {
                 // Actualizar la contraseña
-                $consulta_actualizar = "UPDATE agricultor SET contrasena = '$nueva_contrasena' WHERE id_agricultor = '$id_agricultor'";
+                $consulta_actualizar = "UPDATE agricultor SET contrasena = '$nueva_contrasena' WHERE dni = '$dni_agricultor'";
 
                 if (mysqli_query($conexion, $consulta_actualizar)) {
                     echo "<p>Contraseña cambiada correctamente.</p>";
