@@ -9,7 +9,7 @@ session_start();
     </head>
     <body>
         <form action="añadir_agricultores.php" method="POST">
-            <input type="submit" name="volver" value="Volver"><br>
+            <input type="submit" name="añadir" value="Añadir agricultores"><br>
         </form>
         <?php
         // Conectar con el servidor de base de datos
