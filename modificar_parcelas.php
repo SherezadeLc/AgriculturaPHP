@@ -96,5 +96,8 @@ session_start();
             }
         }
         ?>
+        <form action="editar_parcela.php" method="POST">
+            <input type="submit" name="volver" value="Volver">
+        </form>
     </body>
 </html>
