@@ -66,7 +66,17 @@ and open the template in the editor.
             // Verifica que los campos obligatorios estén completos
             if ($nombre && $id_catastro) {
 
-                //aqui hacemos la consulta a la base de datos para meter la informacion que ha introducido el usuario en el formulario la metemos en la base de datos 
+                
+                    // consulta a la base de datos para insertar al ususario en la misma
+                    $registrar_usuario = "INSERT INTO cliente (dni, nombre, contrasena, id_catastro) VALUES ('$dni', '$nombre', '$contrasena', '$id_catastro')";
+
+                    //conxion a la base de datos para la insercion de la informacion
+                    if (mysqli_query($conexion, $registrar_usuario)) {
+                        echo "Registro exitoso.";
+                    } else {
+                        echo "Error al registrar el usuario: " . mysqli_error($conexion);
+                    }
+//aqui hacemos la consulta a la base de datos para meter la informacion que ha introducido el usuario en el formulario la metemos en la base de datos 
                 $insertar_parcela = "INSERT INTO parcela (id_catastro, numero_parcela) VALUES ('$id_catastro', '$numero_parcela')";
 
                 //aqui hacemos la conexion a la base de datos
@@ -105,15 +115,6 @@ and open the template in the editor.
                     //aqui hacemos la conexion a la base de datos
                     if (mysqli_query($conexion, $insertar_puntos_parcela)) {
                         echo "Insertado en puntos_parcela";
-                    }
-                    // consulta a la base de datos para insertar al ususario en la misma
-                    $registrar_usuario = "INSERT INTO cliente (dni, nombre, contrasena, id_catastro) VALUES ('$dni', '$nombre', '$contrasena', '$id_catastro')";
-
-                    //conxion a la base de datos para la insercion de la informacion
-                    if (mysqli_query($conexion, $registrar_usuario)) {
-                        echo "Registro exitoso.";
-                    } else {
-                        echo "Error al registrar el usuario: " . mysqli_error($conexion);
                     }
                 } else {
                     echo "Por favor, completa todos los campos.";
