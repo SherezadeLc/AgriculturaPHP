@@ -52,5 +52,8 @@ and open the template in the editor.
          // Cerrar la conexión a la base de datos
         mysqli_close($conexion);
         ?>
+        <form action="editar_maquinas.php" method="POST">
+            <input type="submit" name="volver" value="Volver">
+        </form>
     </body>
 </html>
