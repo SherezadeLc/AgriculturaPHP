@@ -96,6 +96,8 @@ and open the template in the editor.
                     echo "Error no se ha encontrado ninguna coincidencia";
                 }
         }
+         // Cerrar la conexión a la base de datos
+        mysqli_close($conexion);
         ?>
     </body>
 </html>
