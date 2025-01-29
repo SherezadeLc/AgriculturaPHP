@@ -19,14 +19,14 @@ and open the template in the editor.
             <label for="tipo_maquina">Tipo maquina:</label><br>
             <select name="tipo_maquina" id="tipo_maquina" required> 
                 <option value="">Seleccione un tipo de maquina</option>
-                <option value="Labrar">Graduadas y cultivadores</option>
-                <option value="Sembrar">Sembradoras de precisión</option>
-                <option value="Regar">Aspersores</option>
-                <option value="Fertilizar">Abonadoras</option>
-                <option value="Cosechar">Cosechadora</option>
-                <option value="Desherbar">Desbrozadora</option>
-                <option value="Arar">Arados de discotecas</option>
-                <option value="Roturar">Subsoladores</option>
+                <option value="Graduadas_y_cultivadores">Graduadas y cultivadores</option>
+                <option value="Sembradoras_de_precisión">Sembradoras de precisión</option>
+                <option value="Aspersores">Aspersores</option>
+                <option value="Abonadoras">Abonadoras</option>
+                <option value="Cosechadora">Cosechadora</option>
+                <option value="Desbrozadora">Desbrozadora</option>
+                <option value="Arados_de_discotecas">Arados de discotecas</option>
+                <option value="Subsoladores">Subsoladores</option>
             </select>
             <br>
             <label for="estado">estado:</label><br>
