@@ -15,62 +15,37 @@ session_start();
 
         // Verificar si se envió el formulario para eliminar una parcela
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['eliminar'])) {
-            //aqui cogemos el id que queremos eliminar
+            // Aquí cogemos el id que queremos eliminar
             $id_parcela = $_POST['id_parcela'];
+            $dni = $_SESSION['dni'];
 
-
-            //aqui hago la consulta para comprobar si exista lo que se quiere eliminar
-            $verificarReferencias = "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela'";
-            //aqui hago la conexion a la base de datos 
+            // Aquí hago la consulta para comprobar si existe lo que se quiere eliminar
+            $verificarReferencias = "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela' AND dni_cliente='$dni'";
             $resultadoReferencias = mysqli_query($conexion, $verificarReferencias);
 
-            //aqui si existe alguno con ese id y si es asi entra
+            // Si existe algún punto asociado con esa parcela
             if (mysqli_num_rows($resultadoReferencias) > 0) {
-                //aqui guardamos la informacion de puntos_parcela con el id que se ha recogido antes
-                $seleccionar_puntos = "SELECT * FROM puntos_parcela WHERE id_parcela='$id_parcela'";
-                //aqui hago la conexion a la base de datos
-                $seleccionar_punto = mysqli_query($conexion, $seleccionar_puntos);
-                //si hay una coincidencia entra
-                if (mysqli_num_rows($seleccionar_punto) > 0) {
-                    //aqui recogo la informacion de la base de datos en la variable
-                    $datos = mysqli_fetch_assoc($seleccionar_punto);
-                    //aqui solo cogo la informacion del id_punto
-                    $id_puntos = $datos['id_punto'];
-                }
-
-                //aqui le borramos el punto de asociacion para poder eliminar luego tanto las parcelas como los puntos
-                $eliminar_punto_asociado = "DELETE FROM puntos_parcela WHERE id_parcela='$id_parcela'";
-                //aqui hago la conexion a la base de datos
+                // Aquí le borramos el punto de asociación para poder eliminar luego las parcelas
+                $eliminar_punto_asociado = "DELETE FROM puntos_parcela WHERE id_parcela='$id_parcela' AND dni_cliente='$dni'";
                 if (mysqli_query($conexion, $eliminar_punto_asociado)) {
-                    echo "Eliminado punto de asociacion";
-                }
-                //aqui le borramos el punto de asociacion con el id que he recogido antes
-                $eliminar_punto = "DELETE FROM puntos WHERE id_punto='$id_puntos'";
-
-                //aqui hago la conexion a la base de datos 
-                if (mysqli_query($conexion, $eliminar_punto)) {
-                    echo "Eliminado punto";
+                    echo "Eliminado punto de asociación.";
                 }
 
-
-
-                // aqui hago la consulta a la base de datos para eliminar la parcela
-                $eliminarParcela = "DELETE FROM parcela WHERE id_parcela='$id_parcela'";
-                //aqui hago la conexion a la base de datos con la consulta para eliminar la parcela
+                // Aquí hacemos la consulta para eliminar la parcela
+                $eliminarParcela = "DELETE FROM parcela WHERE id_parcela='$id_parcela' AND dni_cliente='$dni'";
                 if (mysqli_query($conexion, $eliminarParcela)) {
                     echo "<p>La parcela ha sido eliminada correctamente.</p>";
                 } else {
                     echo "<p>Error al eliminar la parcela: " . mysqli_error($conexion) . "</p>";
                 }
             } else {
-                echo "<p>No puedes eliminar esta parcela porque no se encuentran puntos asociados.</p>";
+                echo "<p>No puedes eliminar esta parcela porque no se encuentran puntos asociados o no pertenecen a tu cuenta.</p>";
             }
         }
 
-
-
-        // Consultar todas las parcelas
-        $consulta = "SELECT * FROM parcela";
+        // Consultar todas las parcelas asociadas al cliente (dni_cliente)
+        $dni_cliente = $_SESSION['dni'];
+        $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";
         $resultado = mysqli_query($conexion, $consulta);
 
         if (mysqli_num_rows($resultado) > 0) {
@@ -115,7 +90,7 @@ session_start();
         mysqli_close($conexion);
         ?>
         <br>
-        <!-- Botón para volver al menú principal -->
+        <!-- Botón para añadir parcelas -->
         <form action="añadir_parcelas.php" method="POST">
             <input type="submit" name="anadir_parcela" value="Añadir Parcela">
         </form>

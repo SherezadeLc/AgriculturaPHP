@@ -44,7 +44,7 @@ session_start();
             } elseif ($_SESSION['tipo'] === 'cliente') {
                 ?>
                 <br><br>
-                <form action="añadir_parcelas.php" method="POST">
+                <form action="editar_parcela.php" method="POST">
                     <input type="submit" name="Añadir" value="Añadir parcelas"><br>
                 </form><br>
                 <form action="crear_trabajo.php" method="POST">
