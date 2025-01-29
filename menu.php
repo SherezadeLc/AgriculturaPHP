@@ -26,9 +26,6 @@ session_start();
                     <input type="submit" name="editar" value="Listar Clientes"><br>
                 </form><br>
 
-                <form action="editar_parcela.php" method="POST">
-                    <input type="submit" name="editar" value="Editar Parcelas"><br>
-                </form><br>
                 <form action="editar_trabajos.php" method="POST">
                     <input type="submit" name="editar" value="Editar Trabajos"><br>
                 </form><br>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 session_start();
 
@@ -71,7 +72,6 @@ $consultaTrabajos = "SELECT t.id_trabajo, p.numero_parcela, m.tipo_maquina, t.ti
 $resultadoTrabajos = mysqli_query($conexion, $consultaTrabajos);
 ?>
 
-<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
@@ -86,8 +86,8 @@ $resultadoTrabajos = mysqli_query($conexion, $consultaTrabajos);
             <select name="id_parcela" id="id_parcela" required>
                 <option value="">Seleccione una parcela</option>
                 <?php while ($parcela = mysqli_fetch_assoc($resultadoParcelas)) { ?>
-                    <option value="<?= $parcela['id_parcela'] ?>">
-                        Parcela #<?= $parcela['numero_parcela'] ?>
+                    <option value="<?php echo $parcela['id_parcela']; ?>">
+                        Parcela #<?php echo $parcela['numero_parcela']; ?>
                     </option>
                 <?php } ?>
             </select>
@@ -96,8 +96,8 @@ $resultadoTrabajos = mysqli_query($conexion, $consultaTrabajos);
             <select name="id_maquina" id="id_maquina" required>
                 <option value="">Seleccione una máquina</option>
                 <?php while ($maquina = mysqli_fetch_assoc($resultadoMaquinas)) { ?>
-                    <option value="<?= $maquina['id_maquina'] ?>">
-                        <?= $maquina['tipo_maquina'] ?>
+                    <option value="<?php echo $maquina['id_maquina']; ?>">
+                        <?php echo $maquina['tipo_maquina']; ?>
                     </option>
                 <?php } ?>
             </select>
@@ -132,11 +132,11 @@ $resultadoTrabajos = mysqli_query($conexion, $consultaTrabajos);
             <tbody>
                 <?php while ($trabajo = mysqli_fetch_assoc($resultadoTrabajos)) { ?>
                     <tr>
-                        <td><?= $trabajo['id_trabajo'] ?></td>
-                        <td>Parcela #<?= $trabajo['numero_parcela'] ?></td>
-                        <td><?= $trabajo['tipo_maquina'] ?></td>
-                        <td><?= $trabajo['tipo_trabajo'] ?></td>
-                        <td><?= $trabajo['estado'] ?></td>
+                        <td><?php echo $trabajo['id_trabajo']; ?></td>
+                        <td>Parcela #<?php echo $trabajo['numero_parcela']; ?></td>
+                        <td><?php echo $trabajo['tipo_maquina']; ?></td>
+                        <td><?php echo $trabajo['tipo_trabajo']; ?></td>
+                        <td><?php echo $trabajo['estado']; ?></td>
                     </tr>
                 <?php } ?>
             </tbody>
