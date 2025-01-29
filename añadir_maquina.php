@@ -29,9 +29,7 @@ and open the template in the editor.
                 <option value="Subsoladores">Subsoladores</option>
             </select>
             <br>
-            <label for="estado">estado:</label><br>
-            <input type="text" name="estado" id="estado" required><br><br>
-
+            
 
 
             <button type="submit" name="agregar_maquina">Agregar Maquina</button><br><br>
@@ -44,9 +42,9 @@ and open the template in the editor.
         if (isset($_POST['agregar_maquina'])) {
             //aqui cogemos la informacion que se ha recogido del formulario
             $tipo_maquina = $_POST['tipo_maquina'];
-            $estado = $_POST['estado'];
+            
             //aqui hacemos la consulta de introducir la informacion a la tabla parcela con la informacion 
-            $insertar_maquina = "INSERT INTO maquina (tipo_maquina, estado) VALUES ('$tipo_maquina', '$estado')";
+            $insertar_maquina = "INSERT INTO maquina (tipo_maquina) VALUES ('$tipo_maquina')";
             //aqui hacemos la conexion a la base de datos
             if (mysqli_query($conexion, $insertar_maquina)) {
                 echo "Insertado en maquina";
