@@ -6,6 +6,75 @@ session_start();
     <head>
         <meta charset="UTF-8">
         <title>Menu</title>
+        <style>
+            /* Estilos generales */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                margin: 0;
+                padding: 0;
+                text-align: center;
+            }
+
+            /* Contenedor principal */
+            .container {
+                width: 80%;
+                margin: auto;
+                padding: 20px;
+                background: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                margin-top: 50px;
+            }
+
+            /* Título */
+            h1 {
+                color: #2c6e49;
+                font-size: 28px;
+            }
+
+            /* Botones */
+            form {
+                margin: 15px 0;
+            }
+
+            input[type="submit"] {
+                background: #2c6e49;
+                color: white;
+                border: none;
+                padding: 12px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s ease-in-out;
+            }
+
+            input[type="submit"]:hover {
+                background: #3a945b;
+            }
+
+            /* Mensaje de bienvenida */
+            .welcome-message {
+                font-size: 18px;
+                font-weight: bold;
+                color: #2c6e49;
+                margin-bottom: 20px;
+            }
+
+            /* Mensaje de error */
+            .error-message {
+                color: red;
+                font-size: 16px;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .container {
+                    width: 95%;
+                }
+            }
+        </style>
     </head>
     <body>
         <?php
