@@ -18,7 +18,7 @@ and open the template in the editor.
 
             <label for="tipo_maquina">Tipo maquina:</label><br>
             <select name="tipo_maquina" id="tipo_maquina" required> 
-                <option value="">Seleccione un tipo de trabajo</option>
+                <option value="">Seleccione un tipo de maquina</option>
                 <option value="Labrar">Labrar</option>
                 <option value="Sembrar">Sembrar</option>
                 <option value="Regar">Regar</option>
