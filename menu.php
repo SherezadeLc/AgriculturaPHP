@@ -19,18 +19,15 @@ session_start();
                 ?>
                 <br><br>
                 <form action="editar_agricultores.php" method="POST">
-                    <input type="submit" name="añadir" value="Editar Agricultores"><br>
+                    <input type="submit" name="añadir" value="Añadir Agricultores"><br>
                 </form><br>
 
                 <form action="editar_clientes.php" method="POST">
                     <input type="submit" name="editar" value="Listar Clientes"><br>
                 </form><br>
 
-                <form action="editar_trabajos.php" method="POST">
-                    <input type="submit" name="editar" value="Editar Trabajos"><br>
-                </form><br>
                 <form action="editar_maquinas.php" method="POST">
-                    <input type="submit" name="editar" value="Editar Máquinas"><br>
+                    <input type="submit" name="editar" value="Añadir Máquinas"><br>
                 </form><br>
                 <?php
             } elseif ($_SESSION['tipo'] === 'agricultor') {
