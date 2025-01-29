@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -84,9 +87,10 @@ and open the template in the editor.
                     $dato = mysqli_fetch_assoc($resultadoReferencias);
                     $id_punto = $dato['id_punto'];
                 }
+                $cliente=$_SESSION['dni'];
                  //aqui hacemos la consulta a la base de datos para intrp¡oducir la informacion que se ha sacado antes de las tablas de parcelas y puntos y lo hemos metido en la 
                 //tabla puntos_paracela
-                $insertar_puntos_parcela = "INSERT INTO puntos_parcela (id_punto,id_parcela) VALUES ('$id_punto','$id_parcela')";
+                $insertar_puntos_parcela = "INSERT INTO puntos_parcela (id_punto,id_parcela,dni_cliente) VALUES ('$id_punto','$id_parcela','$cliente')";
                 if (mysqli_query($conexion, $insertar_puntos_parcela)) {
                     echo "Insertado en puntos_parcela";
                 }else{
