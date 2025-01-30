@@ -74,7 +74,7 @@ session_start();
 
             /* Estilo para el botón de volver */
             a input[type="submit"] {
-                background-color: #f44336;
+                background-color: #388e3c;
                 color: white;
                 padding: 10px 20px;
                 border: none;
@@ -87,7 +87,7 @@ session_start();
 
             /* Hover para el botón de volver */
             a input[type="submit"]:hover {
-                background-color: #d32f2f;
+                background-color: #2c6e29;
             }
 
             /* Estilo para los mensajes de error o éxito */
@@ -106,7 +106,7 @@ session_start();
     </head>
     <body>
         <div class="contenedor">
-            <h2>Añadir Agricultorer</h2>
+            <h2>Añadir Agricultores</h2>
             <!-- Formulario para añadir un agricultor -->
             <form action="añadir_agricultores.php" method="POST">
                 Nombre: <input type="text" id="nombre" name="nombre" required><br><br>

@@ -19,6 +19,7 @@
 
             /* Contenedor principal */
             .contenedor {
+                margin-top: 50px;
                 width: 80%;
                 max-width: 1000px;
                 background-color: #ffffff;
