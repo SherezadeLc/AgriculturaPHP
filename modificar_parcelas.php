@@ -167,7 +167,7 @@ session_start();
                 <label for="longitudes">Longitud:</label>
                 <input type="text" name="longitudes" id="longitudes" required><br><br>
 
-                <a href="cambiar_parcela.php"><input type="submit" name="modificar" value="Modificar"></a>
+                <input type="submit" name="modificar" value="Modificar">
             </form>
 
             <?php
@@ -202,10 +202,11 @@ session_start();
                         }
 
                         // Actualizamos la tabla puntos
-                        $actualizar_puntos = "UPDATE puntos SET latitud='$latitudes', longitud='$longitudes' WHERE id_punto='$id_puntos'";
+                        $actualizar_puntos = "UPDATE puntos SET numero_parcela='$numero_parcelas', latitud='$latitudes', longitud='$longitudes' WHERE id_punto='$id_puntos'";
                         if (mysqli_query($conexion, $actualizar_puntos)) {
                             echo "Se han actualizado los puntos correctamente.<br>";
-                           
+                            // Vuelvo a mostrar los datos actualizados
+                            header("Refresh:0");
                         } else {
                             echo "Error al actualizar los puntos: " . mysqli_error($conexion) . "<br>";
                         }
@@ -217,7 +218,7 @@ session_start();
                 }
             }
             ?>
-            
+
             <!-- Formulario para volver -->
             <form action="editar_parcela.php" method="POST">
                 <input type="submit" name="volver" value="Volver">
