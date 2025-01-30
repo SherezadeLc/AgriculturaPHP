@@ -10,7 +10,7 @@ session_start();
             /* Estilo general del cuerpo */
             body {
                 font-family: Arial, sans-serif;
-                background-color: #f4f7f6;
+                background-color: #e8f5e9;
                 margin: 0;
                 padding: 0;
                 display: flex;
@@ -167,7 +167,7 @@ session_start();
                 <label for="longitudes">Longitud:</label>
                 <input type="text" name="longitudes" id="longitudes" required><br><br>
 
-                <input type="submit" name="modificar" value="Modificar">
+                <input type="submit" name="modificar" value="Modificar"><br><br>
             </form>
 
             <?php

@@ -11,7 +11,7 @@ session_start();
             /* Estilo general del cuerpo */
             body {
                 font-family: Arial, sans-serif;
-                background-color: #f4f7f6;
+                background-color: #e8f5e9;
                 margin: 0;
                 padding: 0;
                 display: flex;
