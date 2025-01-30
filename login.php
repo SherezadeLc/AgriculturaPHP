@@ -19,7 +19,7 @@ session_start();
                 height: 100vh;
             }
 
-            .container {
+            .contenedor {
                 width: 30%;
                 padding: 20px;
                 background-color: #fff;
@@ -47,7 +47,7 @@ session_start();
                 font-size: 16px;
             }
 
-            input[type="submit"], .login-button {
+            input[type="submit"], .boton-registro {
                 background-color: #2e7d32;
                 color: white;
                 padding: 10px 20px;
@@ -60,11 +60,11 @@ session_start();
                 margin-top: 10px;
             }
 
-            input[type="submit"]:hover, .login-button:hover {
+            input[type="submit"]:hover, .boton-registro:hover {
                 background-color: #1b5e20;
             }
 
-            .alert {
+            .error {
                 color: red;
                 font-weight: bold;
                 text-align: center;
@@ -79,7 +79,7 @@ session_start();
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="contenedor">
             <form name="form" action="" method="POST" enctype="multipart/form-data">
                 <h1>Login</h1>
                 <label>DNI:</label>
@@ -88,7 +88,7 @@ session_start();
                 <input type="password" name="password" required>
                 <input type="submit" name="enviar" value="Enviar">
                 <p>¿No estás registrado?</p>
-                <a href="registro.php"><input type="button" class="login-button" name="Registrar" value="Registrar"/></a>
+                <a href="registro.php"><input type="button" class="boton-registro" name="Registrar" value="Registrar"/></a>
             </form>
 
             <?php
@@ -138,9 +138,9 @@ session_start();
                         exit();
                     }
 
-                    echo "<p class='alert'>Error: usuario o contraseña incorrecto.</p>";
+                    echo "<p class='error'>Error: usuario o contraseña incorrecto.</p>";
                 } else {
-                    echo "<p class='alert'>Completa todos los campos por favor.</p>";
+                    echo "<p class='error'>Completa todos los campos por favor.</p>";
                 }
             }
             ?>

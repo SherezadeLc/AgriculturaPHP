@@ -19,7 +19,7 @@ session_start();
                 height: 100vh;
             }
 
-            .container {
+            .contenedor {
                 width: 30%;
                 padding: 20px;
                 background-color: #fff;
@@ -51,7 +51,7 @@ session_start();
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="contenedor">
             <?php
             if (isset($_SESSION['tipo'])) {
                 echo "<h1>Bienvenido, " . $_SESSION['nombre'] . "</h1>";

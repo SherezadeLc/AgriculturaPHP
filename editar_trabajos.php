@@ -3,7 +3,7 @@ session_start();
 
 // Conexión a la base de datos
 $conexion = mysqli_connect("localhost", "root", "", "agricultura")
-    or die("No se puede conectar con el servidor");
+        or die("No se puede conectar con el servidor");
 
 // Verificar si el usuario está autenticado y es cliente
 if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'cliente') {
@@ -52,50 +52,131 @@ $resultadoMaquinas = mysqli_query($conexion, $consultaMaquinas);
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Trabajo</title>
-</head>
-<body>
-    <h2>Crear Trabajo</h2>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Crear Trabajo</title>
+        <style>
+            /* Estilo general del cuerpo */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f1f8e9;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
 
-    <form method="POST" action="">
-        <label for="id_parcela">Parcela:</label>
-        <select name="id_parcela" id="id_parcela" required>
-            <option value="">Seleccione una parcela</option>
-            <?php while ($parcela = mysqli_fetch_assoc($resultadoParcelas)): ?>
-                <option value="<?= $parcela['id_parcela'] ?>">
-                    Parcela #<?= $parcela['numero_parcela'] ?>
-                </option>
-            <?php endwhile; ?>
-        </select>
+            /* Contenedor principal */
+            .contenedor {
+                width: 50%;
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                box-sizing: border-box;
+            }
 
-        <label for="id_maquina">Máquina:</label>
-        <select name="id_maquina" id="id_maquina" required>
-            <option value="">Seleccione una máquina</option>
-            <?php while ($maquina = mysqli_fetch_assoc($resultadoMaquinas)): ?>
-                <option value="<?= $maquina['id_maquina'] ?>">
-                    <?= $maquina['tipo_maquina'] ?>
-                </option>
-            <?php endwhile; ?>
-        </select>
+            /* Títulos */
+            h2 {
+                color: #388e3c;
+            }
 
-        <label for="tipo_trabajo">Tipo de Trabajo:</label>
-        <input type="text" name="tipo_trabajo" id="tipo_trabajo" required>
+            /* Estilo para las etiquetas */
+            label {
+                font-size: 16px;
+                color: #388e3c;
+                display: block;
+                margin: 10px 0 5px;
+            }
 
-        <label for="fecha_inicio">Fecha de Inicio:</label>
-        <input type="date" name="fecha_inicio" id="fecha_inicio" required>
+            /* Estilo para los select y inputs */
+            select, input[type="text"], input[type="date"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-size: 14px;
+            }
 
-        <label for="fecha_fin">Fecha de Fin:</label>
-        <input type="date" name="fecha_fin" id="fecha_fin">
+            /* Botón de envío */
+            button {
+                background-color: #388e3c;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                width: 100%;
+                transition: background-color 0.3s;
+            }
 
-        <button type="submit" name="crear_trabajo">Crear Trabajo</button>
-    </form>
+            /* Hover para el botón */
+            button:hover {
+                background-color: #2c6e29;
+            }
 
-    <br>
-    <a href="menu.php">Volver al menú</a>
-</body>
+            /* Enlace para volver */
+            a {
+                text-decoration: none;
+                color: #388e3c;
+                font-size: 14px;
+                display: inline-block;
+                margin-top: 20px;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <div class="contenedor">
+            <h2>Crear Trabajo</h2>
+            <form method="POST" action="">
+                <label for="id_parcela">Parcela:</label>
+                <select name="id_parcela" id="id_parcela" required>
+                    <option value="">Seleccione una parcela</option>
+                    <?php while ($parcela = mysqli_fetch_assoc($resultadoParcelas)): ?>
+                        <option value="<?= $parcela['id_parcela'] ?>">
+                            Parcela #<?= $parcela['numero_parcela'] ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+
+                <label for="id_maquina">Máquina:</label>
+                <select name="id_maquina" id="id_maquina" required>
+                    <option value="">Seleccione una máquina</option>
+                    <?php while ($maquina = mysqli_fetch_assoc($resultadoMaquinas)): ?>
+                        <option value="<?= $maquina['id_maquina'] ?>">
+                            <?= $maquina['tipo_maquina'] ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+
+                <label for="tipo_trabajo">Tipo de Trabajo:</label>
+                <input type="text" name="tipo_trabajo" id="tipo_trabajo" required>
+
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" name="fecha_inicio" id="fecha_inicio" required>
+
+                <label for="fecha_fin">Fecha de Fin:</label>
+                <input type="date" name="fecha_fin" id="fecha_fin">
+
+                <button type="submit" name="crear_trabajo">Crear Trabajo</button>
+            </form>
+
+            <br>
+            <a href="menu.php">Volver al menú</a>
+        </div>
+    </body>
 </html>
 
 <?php

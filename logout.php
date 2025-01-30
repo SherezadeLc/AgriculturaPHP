@@ -16,7 +16,7 @@
                 height: 100vh;
             }
 
-            .container {
+            .contenedor{
                 width: 30%;
                 padding: 20px;
                 background-color: #fff;
@@ -48,7 +48,7 @@
         </style>
     </head>
     <body>
-        <div class="container">
+        <div class="contenedor">
             <?php
             session_start();
             print '<h1>Estás en Logout</h1>';

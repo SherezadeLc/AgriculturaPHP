@@ -17,7 +17,7 @@
                 min-height: 100vh;
             }
 
-            .container {
+            .contenedor {
                 margin-top: 10px;
                 margin-bottom: 10px;
                 width: 30%;
@@ -50,7 +50,7 @@
                 box-sizing: border-box;
             }
 
-            input[type="submit"], .login-button {
+            input[type="submit"], .boton-login {
                 background-color: #2e7d32;
                 color: white;
                 padding: 12px 20px;
@@ -63,11 +63,11 @@
                 margin-top: 15px;
             }
 
-            input[type="submit"]:hover, .login-button:hover {
+            input[type="submit"]:hover, .boton-login:hover {
                 background-color: #1b5e20;
             }
 
-            .alert {
+            .error {
                 color: red;
                 font-weight: bold;
                 text-align: center;
@@ -83,7 +83,7 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="contenedor">
             <h1>Registro</h1>
             <form method="POST">
                 <label>Nombre:</label>
@@ -114,9 +114,9 @@
             </form>
 
             <hr>
-            <div class="login-container">
+            <div >
                 <p>¿Ya te has registrado?</p>
-                <a href="login.php"><button class="login-button">Iniciar sesión</button></a>
+                <a href="login.php"><button class="boton-login">Iniciar sesión</button></a>
             </div>
         </div>
     </body>
