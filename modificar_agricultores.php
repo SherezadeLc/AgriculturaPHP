@@ -104,7 +104,8 @@ session_start();
             // Consulta de todos los clientes
             $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";
             $resultado = mysqli_query($conexion, $consulta);
-
+//
+            
             if (mysqli_num_rows($resultado) > 0) {
                 ?>
                 <h2>Lista de Clientes</h2>
@@ -120,6 +121,7 @@ session_start();
                     // Mostrar los clientes en la tabla
                     while ($fila = mysqli_fetch_assoc($resultado)) {
                         echo "<tr>
+                            
                                 <td>" . $fila['id_cliente'] . "</td>
                                 <td>" . $fila['nombre'] . "</td>
                                 <td>" . $fila['dni'] . "</td>

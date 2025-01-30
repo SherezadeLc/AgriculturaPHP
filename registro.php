@@ -107,7 +107,8 @@
             <?php
             // Conexión a la base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura") or die("No se puede conectar con el servidor o seleccionar la base de datos");
-
+//
+            //
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar'])) {
                 @$nombre = $_POST['nombre'];
                 @$apellidos = $_POST['apellidos'];

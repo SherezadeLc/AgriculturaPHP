@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <?php
 session_start();
-
+//
+////
+//
+//
 // Conexión a la base de datos
 $conexion = mysqli_connect("localhost", "root", "", "agricultura")
         or die("No se puede conectar con el servidor");

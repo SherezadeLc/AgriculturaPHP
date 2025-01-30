@@ -178,7 +178,9 @@ session_start();
                 $numero_parcelas = $_POST['numero_parcelas'];
                 $latitudes = $_POST['latitudes'];
                 $longitudes = $_POST['longitudes'];
-
+//
+////
+//
                 // Verificamos si el número de catastro existe en la tabla cliente
                 $verificar_catastro = "SELECT * FROM cliente WHERE id_catastro = '$id_catastros'";
                 $resultado_verificacion = mysqli_query($conexion, $verificar_catastro);

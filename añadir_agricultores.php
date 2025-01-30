@@ -117,7 +117,8 @@ session_start();
 
 
             <?php
-            // Conectar con la base de datos
+            //
+            // Conectar con la base de datos//
             $conexion = mysqli_connect("localhost", "root", "", "agricultura");
 
             if (!$conexion) {

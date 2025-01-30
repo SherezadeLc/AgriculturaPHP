@@ -12,7 +12,9 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'cliente') {
 if (!isset($_SESSION['dni'])) {
     die("Error: No se encontró el DNI del cliente en la sesión.");
 }
-
+//
+//
+//
 $dni_cliente = $_SESSION['dni'];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['crear_trabajo'])) {

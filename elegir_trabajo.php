@@ -164,6 +164,9 @@
             </form>
 
             <?php
+            //
+            //
+            
             if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['elegir_trabajo'])) {
                 $id_trabajo = $_POST['id_trabajo'];
                 $fecha_inicio = date("Y-m-d H:i:s");

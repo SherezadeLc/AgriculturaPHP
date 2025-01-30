@@ -108,7 +108,7 @@ session_start();
             // Consultar todos los agricultores
             $consulta = "SELECT * FROM agricultor";
             $resultado = mysqli_query($conexion, $consulta);
-
+//**
             if (mysqli_num_rows($resultado) > 0) {
                 ?>
                 <h2>Editar Agricultores</h2>

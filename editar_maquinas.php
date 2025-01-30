@@ -85,6 +85,8 @@ session_start();
     <body>
         <div class="contenedor">
             <?php
+            //
+            //
             // Conectar con el servidor de base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura")
                     or die("No se puede conectar con el servidor");

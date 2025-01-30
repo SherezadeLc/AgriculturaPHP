@@ -126,7 +126,9 @@ session_start();
                         header("Location: menu.php");
                         exit();
                     }
-
+//
+                    //
+                    //
                     $consulta_administrador = "SELECT * FROM administrador WHERE dni='$dni' AND contrasena='$contrasena'";
                     $resultado_administrador = mysqli_query($conexion, $consulta_administrador);
                     if (mysqli_num_rows($resultado_administrador) > 0) {

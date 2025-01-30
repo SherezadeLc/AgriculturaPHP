@@ -119,6 +119,9 @@ session_start();
                 }
             }
 
+            ////
+            //**
+            //
             // Consultar todas las parcelas asociadas al cliente (dni_cliente)
             $dni_cliente = $_SESSION['dni'];
             $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";

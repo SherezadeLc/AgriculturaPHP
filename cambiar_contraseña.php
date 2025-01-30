@@ -126,6 +126,8 @@ if (!isset($_SESSION['tipo']) || $_SESSION['tipo'] !== 'agricultor') {
 </html>
 
 <?php
+//
+////
 // Conectar con la base de datos
 $conexion = mysqli_connect("localhost", "root", "", "agricultura");
 

@@ -50,6 +50,9 @@
     <body>
         <div class="contenedor">
             <?php
+            //
+            //
+            
             session_start();
             print '<h1>Estás en Logout</h1>';
             if (isset($_SESSION["nombre"])) {

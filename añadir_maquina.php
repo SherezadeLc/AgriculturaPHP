@@ -101,6 +101,8 @@ session_start();
                 <button type="submit" name="agregar_maquina">Agregar Maquina</button><br><br>
             </form>
             <?php
+            //
+            ////s
             // Conectar con el servidor de base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura")
                     or die("No se puede conectar con el servidor");
