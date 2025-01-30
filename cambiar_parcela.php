@@ -85,48 +85,69 @@ session_start();
     <body>
         <div class="contenedor">
             <?php
-            // put your code here
             // Conexión a la base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura") or die("No se puede conectar con el servidor");
+            $dniUsuario = $_SESSION['dni'];
 
-            // Mostramos las parcelas existentes
-            echo "<h2>PARCELAS EXISTENTES</h2>";
-            $parcelas_existentes = mysqli_query($conexion, "SELECT * FROM parcela");
-            $puntos_existentes = mysqli_query($conexion, "SELECT * FROM puntos");
+            // Inicializar variables con valores predeterminados
+            $id_punto = null;
+            $id_parcela = null;
 
-            if (mysqli_num_rows($parcelas_existentes) > 0 && mysqli_num_rows($puntos_existentes) > 0) {
-                echo "<div style='float:left'>";
-                echo "<table border='1'>";
-                echo "<tr><th>ID Parcela</th><th>Numero Catastro</th><th>Numero Parcela</th></tr>";
+            // Consulta para obtener los datos de puntos_parcela
+            $coger_datos = "SELECT * FROM puntos_parcela WHERE dni_cliente='$dniUsuario'";
 
-                // Aquí recuperamos primero todos los resultados de las parcelas
-                while ($fila1 = mysqli_fetch_assoc($parcelas_existentes)) {
-                    echo "<tr>
-            <td>{$fila1['id_parcela']}</td>
-                        <td>{$fila1['id_catastro']}</td>
-                        <td>{$fila1['numero_parcela']}</td>"
-                    . "</tr>";
+            // Ejecuta la consulta
+            $resultado = mysqli_query($conexion, $coger_datos);
+
+            if ($resultado) {
+                if (mysqli_num_rows($resultado) > 0) {
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        $id_punto = $fila['id_punto'];
+                        $id_parcela = $fila['id_parcela'];
+                    }
                 }
-                echo "</table>";
-                echo "</div>";
-                echo "<div style='float:left'>";
-                echo "<table border='1'>";
-
-                echo "<tr><th>Latitud</th><th>Longitud</th></tr>";
-                // Luego recuperamos todos los resultados de los puntos (puedes usar un contador o lógica adicional para combinar correctamente)
-                while ($fila2 = mysqli_fetch_assoc($puntos_existentes)) {
-                    echo "<tr>
-                        
-                        <td>{$fila2['latitud']}</td>
-                        <td>{$fila2['longitud']}</td>
-                    </tr>";
-                }
-                echo "</table>";
-                echo "</div>";
             } else {
-                echo "<p>No hay parcelas existentes.</p>";
+                echo "Error al obtener los datos.";
             }
 
+            // Mostramos las parcelas existentes si las variables son válidas
+            if ($id_punto !== null && $id_parcela !== null) {
+                echo "<h2>PARCELAS EXISTENTES</h2>";
+                $parcelas_existentes = mysqli_query($conexion, "SELECT * FROM parcela WHERE id_parcela = '$id_parcela'");
+                $puntos_existentes = mysqli_query($conexion, "SELECT * FROM puntos WHERE id_punto = '$id_punto'");
+
+                if (mysqli_num_rows($parcelas_existentes) > 0 && mysqli_num_rows($puntos_existentes) > 0) {
+                    echo "<div style='float:left'>";
+                    echo "<table border='1'>";
+                    echo "<tr><th>ID Parcela</th><th>Numero Catastro</th><th>Numero Parcela</th></tr>";
+
+                    while ($fila1 = mysqli_fetch_assoc($parcelas_existentes)) {
+                        echo "<tr>
+                                <td>{$fila1['id_parcela']}</td>
+                                <td>{$fila1['id_catastro']}</td>
+                                <td>{$fila1['numero_parcela']}</td>
+                            </tr>";
+                    }
+                    echo "</table>";
+                    echo "</div>";
+                    echo "<div style='float:left'>";
+                    echo "<table border='1'>";
+                    echo "<tr><th>Latitud</th><th>Longitud</th></tr>";
+
+                    while ($fila2 = mysqli_fetch_assoc($puntos_existentes)) {
+                        echo "<tr>
+                                <td>{$fila2['latitud']}</td>
+                                <td>{$fila2['longitud']}</td>
+                            </tr>";
+                    }
+                    echo "</table>";
+                    echo "</div>";
+                } else {
+                    echo "<p>No hay parcelas existentes.</p>";
+                }
+            } else {
+                echo "<p>No se encontraron datos para el usuario.</p>";
+            }
 
             // Cerrar conexión
             mysqli_close($conexion);

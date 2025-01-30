@@ -102,7 +102,7 @@ session_start();
             }
 
             // Consulta de todos los clientes
-            $consulta = "SELECT * FROM cliente";
+            $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";
             $resultado = mysqli_query($conexion, $consulta);
 
             if (mysqli_num_rows($resultado) > 0) {

@@ -80,7 +80,6 @@ session_start();
                 font-weight: bold;
             }
         </style>
-
     </head>
     <body>
         <div class="contenedor">
@@ -88,56 +87,78 @@ session_start();
             // Conexión a la base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura") or die("No se puede conectar con el servidor");
 
-            // Mostramos las parcelas existentes
-            echo "<h2>PARCELAS EXISTENTES</h2>";
-            $parcelas_existentes = mysqli_query($conexion, "SELECT * FROM parcela");
-            $puntos_existentes = mysqli_query($conexion, "SELECT * FROM puntos");
+            $dniUsuario = $_SESSION['dni'];
 
-            // Consultar todas las parcelas asociadas al cliente (dni_cliente)
-            $dni_cliente = $_SESSION['dni'];
-            $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";
-            $resultado = mysqli_query($conexion, $consulta);
+            // Inicializar variables con valores predeterminados
+            $id_punto = null;
+            $id_parcela = null;
 
-            if (mysqli_num_rows($resultado) > 0) {
-                ?>
-                <h2>Editar Parcelas</h2>
-                <table border="1">
-                    <tr>
-                        <th>ID Parcela</th>
-                        <th>ID Catastro</th>
-                        <th>Número Parcela</th>
+            // Consulta para obtener los datos de puntos_parcela
+            $coger_datos = "SELECT * FROM puntos_parcela WHERE dni_cliente='$dniUsuario'";
 
-                    </tr>
-                    <?php
-                    // Mostrar las parcelas en la tabla
-                    while ($row = mysqli_fetch_assoc($resultado)) {
-                        echo "<tr>
-                        <td>" . $row['id_parcela'] . "</td>
-                        <td>" . $row['id_catastro'] . "</td>
-                        <td>" . $row['numero_parcela'] . "</td>
-                        
-                            
-                      </tr>";
+            // Ejecuta la consulta
+            $resultado = mysqli_query($conexion, $coger_datos);
+
+            if ($resultado) {
+                if (mysqli_num_rows($resultado) > 0) {
+                    while ($fila = mysqli_fetch_assoc($resultado)) {
+                        $id_punto = $fila['id_punto'];
+                        $id_parcela = $fila['id_parcela'];
                     }
-                    ?>
-                </table>
-                <?php
+                }
             } else {
-                echo "<p>No hay parcelas registradas.</p>";
+                echo "Error al obtener los datos.";
             }
-            ?>
-            <br><br><br><br>
-            <br>
 
+            // Mostramos las parcelas existentes si las variables son válidas
+            if ($id_punto !== null && $id_parcela !== null) {
+                echo "<h2>PARCELAS EXISTENTES</h2>";
+                $parcelas_existentes = mysqli_query($conexion, "SELECT * FROM parcela WHERE id_parcela = '$id_parcela'");
+                $puntos_existentes = mysqli_query($conexion, "SELECT * FROM puntos WHERE id_punto = '$id_punto'");
+
+                if (mysqli_num_rows($parcelas_existentes) > 0 && mysqli_num_rows($puntos_existentes) > 0) {
+                    echo "<div style='float:left'>";
+                    echo "<table border='1'>";
+                    echo "<tr><th>ID Parcela</th><th>Numero Catastro</th><th>Numero Parcela</th></tr>";
+
+                    while ($fila1 = mysqli_fetch_assoc($parcelas_existentes)) {
+                        echo "<tr>
+                                <td>{$fila1['id_parcela']}</td>
+                                <td>{$fila1['id_catastro']}</td>
+                                <td>{$fila1['numero_parcela']}</td>
+                            </tr>";
+                    }
+                    echo "</table>";
+                    echo "</div>";
+                    echo "<div style='float:left'>";
+                    echo "<table border='1'>";
+                    echo "<tr><th>Latitud</th><th>Longitud</th></tr>";
+
+                    while ($fila2 = mysqli_fetch_assoc($puntos_existentes)) {
+                        echo "<tr>
+                                <td>{$fila2['latitud']}</td>
+                                <td>{$fila2['longitud']}</td>
+                            </tr>";
+                    }
+                    echo "</table>";
+                    echo "</div>";
+                } else {
+                    echo "<p>No hay parcelas existentes.</p>";
+                }
+            } else {
+                echo "<p>No se encontraron datos para el usuario.</p>";
+            }?>
+
+            <br><br><br><br><br><br>
             <!-- Formulario para modificar la parcela -->
-            <form action="cambiar_parcela.php"method="POST">
+            <form action="" method="POST">
                 <label for="id_parcelas">ID Parcela:</label>
                 <input type="text" name="id_parcelas" id="id_parcelas" required><br><br>
 
-                <label for="id_catastros">Numero Catastro:</label>
+                <label for="id_catastros">Número Catastro:</label>
                 <input type="text" name="id_catastros" id="id_catastros" required><br><br>
 
-                <label for="numero_parcelas">Numero Parcela:</label>
+                <label for="numero_parcelas">Número Parcela:</label>
                 <input type="text" name="numero_parcelas" id="numero_parcelas" required><br><br>
 
                 <label for="latitudes">Latitud:</label>
@@ -146,7 +167,7 @@ session_start();
                 <label for="longitudes">Longitud:</label>
                 <input type="text" name="longitudes" id="longitudes" required><br><br>
 
-                <input type="submit" name="modificar" value="Modificar">
+                <a href="cambiar_parcela.php"><input type="submit" name="modificar" value="Modificar"></a>
             </form>
 
             <?php
@@ -184,6 +205,7 @@ session_start();
                         $actualizar_puntos = "UPDATE puntos SET latitud='$latitudes', longitud='$longitudes' WHERE id_punto='$id_puntos'";
                         if (mysqli_query($conexion, $actualizar_puntos)) {
                             echo "Se han actualizado los puntos correctamente.<br>";
+                           
                         } else {
                             echo "Error al actualizar los puntos: " . mysqli_error($conexion) . "<br>";
                         }
@@ -195,7 +217,7 @@ session_start();
                 }
             }
             ?>
-
+            
             <!-- Formulario para volver -->
             <form action="editar_parcela.php" method="POST">
                 <input type="submit" name="volver" value="Volver">
