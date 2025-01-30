@@ -1,5 +1,5 @@
-<?
-    php session_start(); 
+<?php
+     session_start(); 
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,39 +17,39 @@
     $parcelas_existentes = mysqli_query($conexion, "SELECT * FROM parcela");
     $puntos_existentes = mysqli_query($conexion, "SELECT * FROM puntos");
 
-    if (mysqli_num_rows($parcelas_existentes) > 0 && mysqli_num_rows($puntos_existentes) > 0) {
-        echo "<div style='float:left'>";
-        echo "<table border='1'>";
-        echo "<tr><th>ID Parcela</th><th>Numero Catastro</th><th>Numero Parcela</th></tr>";
-        
-        // Aquí recuperamos primero todos los resultados de las parcelas
-        while ($fila1 = mysqli_fetch_assoc($parcelas_existentes)) {
-            echo "<tr>
-            <td>{$fila1['id_parcela']}</td>
-                        <td>{$fila1['id_catastro']}</td>
-                        <td>{$fila1['numero_parcela']}</td>"
-                        . "</tr>";
-            
-        }
-        echo "</table>";
-        echo "</div>";
-        echo "<div style='float:left'>";
-        echo "<table border='1'>";
-       
-        echo "<tr><th>Latitud</th><th>Longitud</th></tr>";
-        // Luego recuperamos todos los resultados de los puntos (puedes usar un contador o lógica adicional para combinar correctamente)
-            while ($fila2 = mysqli_fetch_assoc($puntos_existentes)) {
-             echo "<tr>
+     // Consultar todas las parcelas asociadas al cliente (dni_cliente)
+        $dni_cliente = $_SESSION['dni'];
+        $consulta = "SELECT * FROM parcela WHERE id_parcela IN (SELECT id_parcela FROM puntos_parcela WHERE dni_cliente='$dni_cliente')";
+        $resultado = mysqli_query($conexion, $consulta);
+
+        if (mysqli_num_rows($resultado) > 0) {
+            ?>
+            <h2>Editar Parcelas</h2>
+            <table border="1">
+                <tr>
+                    <th>ID Parcela</th>
+                    <th>ID Catastro</th>
+                    <th>Número Parcela</th>
+                    
+                </tr>
+                <?php
+                // Mostrar las parcelas en la tabla
+                while ($row = mysqli_fetch_assoc($resultado)) {
+                    echo "<tr>
+                        <td>" . $row['id_parcela'] . "</td>
+                        <td>" . $row['id_catastro'] . "</td>
+                        <td>" . $row['numero_parcela'] . "</td>
                         
-                        <td>{$fila2['latitud']}</td>
-                        <td>{$fila2['longitud']}</td>
-                    </tr>";
-            }
-        echo "</table>";
-        echo "</div>";
-    } else {
-        echo "<p>No hay parcelas existentes.</p>";
-    }
+                            
+                      </tr>";
+                }
+                ?>
+            </table>
+            <?php
+        } else {
+            echo "<p>No hay parcelas registradas.</p>";
+        }
+
     ?>
 <br><br><br><br>
     <br>
