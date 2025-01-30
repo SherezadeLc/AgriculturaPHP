@@ -126,7 +126,7 @@ session_start();
 
             </form>
             <?php
-            // put your code here
+            
             // Conexión a la base de datos
             $conexion = mysqli_connect("localhost", "root", "", "agricultura")
                     or die("No se puede conectar con el servidor");
