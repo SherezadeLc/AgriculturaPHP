@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?
+    php session_start(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +55,7 @@
     <br>
 
     <!-- Formulario para modificar la parcela -->
-    <form action="" method="POST">
+    <form action="cambiar_parcela.php"method="POST">
         <label for="id_parcelas">ID Parcela:</label>
         <input type="text" name="id_parcelas" id="id_parcelas" required><br><br>
 
